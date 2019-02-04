@@ -1,12 +1,11 @@
 # Neo4j
 Para iniciar con el trabajo de Neo4j, nos encontramos con Cypher un lenguaje de consulta de base de datos expresivo (pero compacto). Aunque actualmente es específico de Neo4j, su estrecha afinidad con nuestro hábito de representar gráficos como diagramas lo hace ideal para la descripción de gráficos mediante programación.
-En este proyecto se utilizó completamente la interfaz grafica de Neo4j Desktop que permite observar de ampiimiente la relacion de los grafos.
+En este proyecto se utilizó completamente la interfaz gráfica de Neo4j Desktop que permite observar de ampliamente la relación de los grafos.
 
 ### Datos
 
-Para subir los datos a las base de datos de Neo4j, se trabajo con la version normalizada del modelo utilizado en la base de datos relacional, permitiendo obtener un grafo mas explicito
-
-Para subir información como se menciono anteriormete se usa el lenjuage Cypher siguinedo la siguinete estructura:
+Para subir los datos a la base de datos de Neo4j, se trabajó con la versión normalizada del modelo utilizado en la base de datos relacional, permitiendo obtener un grafo más explicito
+Para subir información como se mencionó anteriormente se usa el lenguaje Cypher siguiendo la siguiente estructura:
 
 ```SQL
 CREATE (v:Victima {_id: 1, nombre: "Lambertina",apellidos: "Jiménez Ramírez",nacionalidad: "Mexicana", causa_muerte: "Herida de bala" , hora_muerte: "14:00"}),
@@ -28,7 +27,7 @@ WHERE f._id=1 AND v._id=1
 -- Creamos la relacion entre el femicidio y la victima
 CREATE (f)-[d:tieneVictima]->(v) 
 ```
-Para mejorar o crear un proceso mas rapido se puede combinar el proceso de crear los nodos y los nodos en una misma sentencia CREATE, pero para los nodos que se relacionen con nodos ya creados en necesario realizar el proceso anterior.
+Para mejorar o crear un proceso más rápido se puede combinar el proceso de crear los nodos y los nodos en una misma sentencia CREATE, pero para los nodos que se relacionen con nodos ya creados en necesario realizar el proceso anterior.
 
 ```SQL
 CREATE (v:Victima {_id: 2, causa_muerte: "Herida de bala"}),
@@ -45,8 +44,11 @@ CREATE (v:Victima {_id: 2, causa_muerte: "Herida de bala"}),
 MATCH (de:Departamento), (p:Provincia)
 WHERE p._id=2 AND de._id=2 
 CREATE (p)-[d:estaDepartamento]->(de)
-
+-- Se relaciona el departamento por Pais(México)  
 MATCH (de:Departamento), (pa:Pais)
 WHERE pa._id=1 AND de._id=2
 CREATE (de)-[d:estaDepartamento]->(pa)
 ```
+### Resultado - Neo4j Desktop
+<img src="https://raw.githubusercontent.com/jahurtadod/femisidios-db/master/neo4j/base.PNG"
+     alt="Femicidios Neo4j"/>

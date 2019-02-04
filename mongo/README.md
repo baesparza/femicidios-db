@@ -6,7 +6,7 @@ mongod # inicia el servidor de mongodb, deja el servicio corriendo
 mongo # para ejecutar comandos de mongo, habilita el shell propio de mongo
 show dbs # muestra las bases de datos, (como show databases en mysql)
 use femicidioMexicoDB # crea la base de datos (pero no la crea exactamente hasta exista un valor en la base)
-mongodump --db femicidioMexicoDB # generar un resapaldo d ela base de datos 
+mongodump --db femicidioMexicoDB # generar un resapaldo de la base de datos 
 mongorestore --db femicidioMexicoDB dump/femicidioMexicoDB # recupera la base de datos en base a los documentos creados del comando anterior
 ```
 ### Sentencias
@@ -20,7 +20,7 @@ db.createUser({
 });
 
 ```
-Cabe recalcar que el funcionamiento de MongoDB se da con el uso de coleciones, las mismas que buscan agrupar un conjunto de documentos que posean una estructura similar, pero la libertad que posee MongoDB puede generar ciertas fallos por la extensa liberta que ofreco por lo que se definio el siguiente jsonSchema 
+Cabe recalcar que el funcionamiento de MongoDB se da con el uso de colecciones, las mismas que buscan agrupar un conjunto de documentos que posean una estructura similar, pero la libertad que posee MongoDB puede generar ciertos fallos por la extensa liberta que ofrece por lo que se definió el siguiente jsonSchema:
 ```javascript
 }
 // Crear Collection
@@ -72,13 +72,17 @@ db.customers.find().pretty()
 ```
 
 ### Datos
-Para agregar datos en la base de datos creada se puede realizar en documento por documneto o un arreglo de documentos siguiendo la siguiente estructura
+Para agregar datos en la base de datos creada se puede realizar en documento por documento o un arreglo de documentos siguiendo la siguiente estructura
 ```javascript
 db.femicidios.insert(
     { fecha_femicidio: "01/06/2018", mes: "06", año: "2018", pais: "México", departamento: "Tlajomulco de Zúñiga", provincia: "Jalisco", circunstancias: "Presentó un impacto de bala a la altura del pómulo izquierdo y otro en la espalda", causa_muerte: "Herida de bala", tipo_arma: "Arma de fuego", noticias: { url: "http://www.ntrguadalajara.com/post.php?id_nota=100169", fecha: "17/01/2019", texto: "Asesinan a otra mujer en Tlajomulco", autor: "Ezequiel Cruz", categoria: "Policiaca" } }
 )
 ```
-Pero para facilitar este proceso se lo realizo con el uso del propia interfaz grafica ofrecida por MongoDB que nos permite cargar directamente desde un archivo JSON 
+Pero para facilitar este proceso se lo realizo con el uso de la propia interfaz gráfica ofrecida por MongoDB que nos permite cargar directamente desde un archivo JSON
+
+<img src="https://raw.githubusercontent.com/jahurtadod/femisidios-db/master/mongo/datos.PNG"
+     alt="Cargar datos desde MongoDB Compass"/>
+
 ```JSON
 {"fecha_femicidio": "01/06/2018","mes": "06","año": "2018","hora": "14:00","pais": "México","lugar": "Buena Vista de la Salud","departamento": "Chilpancingo de los Bravo","provincia": "Guerrero","circunstancias": "Fue herida a balazos por su pareja sentimental en el interior de su domicilio","victima": {"nombre": "Lambertina","apellidos": "Jiménez Ramírez","nacionalidad": "Mexicana"},"agresor": {"nombre": "Aníbal Ignacio","apellidos": "Valente","situación": "Profugos"},"causa_muerte": "Herida de bala","relacion": "Conyugue","estado_caso": "Investigación","tipo_arma": "Arma de fuego","noticias": {"url": "http://redesdelsur.com.mx/2016/index.php/seguridad-y-justicias/35967-mujer-fue-asesinada-a-balazos-por-su-pareja-en-buena-vista-de-la-salud","fecha": "17/01/2019","texto": "Mujer fue asesinada a balazos por su pareja en Buena Vista de la Salud","categoria": "Seguridad y Justicia"}}
 {"fecha_femicidio": "01/06/2018","mes": "06","año": "2018","pais": "México","departamento": "Tlajomulco de Zúñiga","provincia": "Jalisco","circunstancias": "Presentó un impacto de bala a la altura del pómulo izquierdo y otro en la espalda","causa_muerte": "Herida de bala","tipo_arma": "Arma de fuego","noticias": {"url": "http://www.ntrguadalajara.com/post.php?id_nota=100169","fecha": "17/01/2019","texto": "Asesinan a otra mujer en Tlajomulco","autor": "Ezequiel Cruz","categoria": "Policiaca"}}
@@ -93,8 +97,8 @@ Pero para facilitar este proceso se lo realizo con el uso del propia interfaz gr
 
 ```
 ### Funcionamiento
-A medida que sus datos crecen, la necesidad de establecer índices adecuados se vuelve fundamental para el rendimiento. MongoDB admite una amplia gama de opciones de indexación para permitir una consulta rápida de sus datos, en este caso no se consideror permtitente la creacion de un nuevo index debedio a la cantidad de datos que se posee.
-Un apartado interesante que podemos encontrar en MongoDB es la existencias de ciertas caracteristicas de SQL como es el GROUP BY:
+A medida que sus datos crecen, la necesidad de establecer índices adecuados se vuelve fundamental para el rendimiento. MongoDB admite una amplia gama de opciones de indexación para permitir una consulta rápida de sus datos, en este caso no se considera permitente la creación de un nuevo índex debido a la cantidad de datos que se posee.
+Un apartado interesante que podemos encontrar en MongoDB es la existencias de ciertas características de SQL como es el GROUP BY:
 
 ```javascript
 db.femicidios.aggregate([{
@@ -106,13 +110,16 @@ db.femicidios.aggregate([{
     }
 }])
 ```
-Para realizar consultas a través desde MongoDB Compas se sigue la siguinete estructura:
+Para realizar consultas a través desde MongoDB Compas se sigue la siguiente estructura:
 ```shell
 FILTER { provincia: "Oaxaca" } # Filtra los datos 
-PROJECT { "victima": 0, "agresor": 0, "noticias": 0, _id: 0 }
-SORT {fecha_femicidio: 1}
+PROJECT { "victima": 0, "agresor": 0, "noticias": 0, _id: 0 } # Selecciona que atribustos mostar
+SORT {fecha_femicidio: 1} # Ordena
 ```
-Ahora observemos como se realizaria consultas directamente en el el Shell de MondoDB
+<img src="https://raw.githubusercontent.com/jahurtadod/femisidios-db/master/mongo/busqueda.PNG"
+     alt="Buscar datos desde MongoDB Compass"/>
+
+Ahora observemos como se realizaría consultas directamente en el Shell de MondoDB
 ```javascript
 // Femicidios con victimas mayores de 18 años
 db.femicidios.find({ "victima.edad": { $gt: 18 } })
@@ -174,3 +181,6 @@ db.femicidios.find(
     { "victima": 0, "agresor": 0, "noticias": 0, _id: 0 }
 ).sort({ fecha_femicidio: 1 })
 ```
+### Resultado - MongoDB
+<img src="https://raw.githubusercontent.com/jahurtadod/femisidios-db/master/mongo/base.PNG"
+     alt="Femicidios MongoDB"/>
