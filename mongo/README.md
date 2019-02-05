@@ -79,10 +79,8 @@ db.femicidios.insert(
 )
 ```
 Pero para facilitar este proceso se lo realizo con el uso de la propia interfaz gráfica ofrecida por MongoDB que nos permite cargar directamente desde un archivo JSON
-
-<img src="https://raw.githubusercontent.com/jahurtadod/femisidios-db/master/mongo/datos.PNG"
-     alt="Cargar datos desde MongoDB Compass"/>
-
+<div style="text-align:center"><img src="https://raw.githubusercontent.com/jahurtadod/femisidios-db/master/mongo/datos.PNG"
+     alt="Cargar datos desde MongoDB Compass"/></div>
 ```JSON
 {"fecha_femicidio": "01/06/2018","mes": "06","año": "2018","hora": "14:00","pais": "México","lugar": "Buena Vista de la Salud","departamento": "Chilpancingo de los Bravo","provincia": "Guerrero","circunstancias": "Fue herida a balazos por su pareja sentimental en el interior de su domicilio","victima": {"nombre": "Lambertina","apellidos": "Jiménez Ramírez","nacionalidad": "Mexicana"},"agresor": {"nombre": "Aníbal Ignacio","apellidos": "Valente","situación": "Profugos"},"causa_muerte": "Herida de bala","relacion": "Conyugue","estado_caso": "Investigación","tipo_arma": "Arma de fuego","noticias": {"url": "http://redesdelsur.com.mx/2016/index.php/seguridad-y-justicias/35967-mujer-fue-asesinada-a-balazos-por-su-pareja-en-buena-vista-de-la-salud","fecha": "17/01/2019","texto": "Mujer fue asesinada a balazos por su pareja en Buena Vista de la Salud","categoria": "Seguridad y Justicia"}}
 {"fecha_femicidio": "01/06/2018","mes": "06","año": "2018","pais": "México","departamento": "Tlajomulco de Zúñiga","provincia": "Jalisco","circunstancias": "Presentó un impacto de bala a la altura del pómulo izquierdo y otro en la espalda","causa_muerte": "Herida de bala","tipo_arma": "Arma de fuego","noticias": {"url": "http://www.ntrguadalajara.com/post.php?id_nota=100169","fecha": "17/01/2019","texto": "Asesinan a otra mujer en Tlajomulco","autor": "Ezequiel Cruz","categoria": "Policiaca"}}
@@ -116,8 +114,8 @@ FILTER { provincia: "Oaxaca" } # Filtra los datos
 PROJECT { "victima": 0, "agresor": 0, "noticias": 0, _id: 0 } # Selecciona que atribustos mostar
 SORT {fecha_femicidio: 1} # Ordena
 ```
-<img src="https://raw.githubusercontent.com/jahurtadod/femisidios-db/master/mongo/busqueda.PNG"
-     alt="Buscar datos desde MongoDB Compass"/>
+<div style="text-align:center"><img src="https://raw.githubusercontent.com/jahurtadod/femisidios-db/master/mongo/busqueda.PNG"
+     alt="Buscar datos desde MongoDB Compass"/></div>
 
 Ahora observemos como se realizaría consultas directamente en el Shell de MondoDB
 ```javascript
@@ -182,5 +180,5 @@ db.femicidios.find(
 ).sort({ fecha_femicidio: 1 })
 ```
 ### Resultado - MongoDB
-<img src="https://raw.githubusercontent.com/jahurtadod/femisidios-db/master/mongo/base.PNG"
-     alt="Femicidios MongoDB"/>
+<div style="text-align:center"><img src="https://raw.githubusercontent.com/jahurtadod/femisidios-db/master/mongo/base.PNG"
+     alt="Femicidios MongoDB"/></div>

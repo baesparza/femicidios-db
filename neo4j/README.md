@@ -50,5 +50,6 @@ WHERE pa._id=1 AND de._id=2
 CREATE (de)-[d:estaDepartamento]->(pa)
 ```
 ### Resultado - Neo4j Desktop
-<img src="https://raw.githubusercontent.com/jahurtadod/femisidios-db/master/neo4j/base.PNG"
-     alt="Femicidios Neo4j"/>
+
+<div style="text-align:center"><img src="https://raw.githubusercontent.com/jahurtadod/femisidios-db/master/neo4j/base.PNG"
+     alt="Femicidios Neo4j"/></div>
