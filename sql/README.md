@@ -18,6 +18,8 @@ Tras aplicar las reglas de normalización, se determinaron las sientes tablas a 
 -	NoticiasPalabrasClave
 -	PalabrasClave
 
+##### Cambios en el Esquema
+Debido a la realidad de los datos ofrecidos por las noticias encontradas, el modelo anterior contiene errores debido a la existencia de valores nulos en la tabla de lugares, complicado crear las relaciones entre los departamentos y lugar, por tal motivo se procedio a realizar cambios en modelo.
 <div style="text-align:center"><img src="https://raw.githubusercontent.com/jahurtadod/femisidios-db/master/sql/tablaNormalizada.png"
     alt="Modelo Normalizado"/></div>
 
@@ -812,13 +814,3 @@ INSERT INTO femisidios_noticias (
 		bt.nro = f.id
 		AND bt.nro_url3 = n.id;
 ```
-##### Capturas de Pantalla
-
-<div style="text-align:center"><img src=""
-    alt="Creación del Modelo Normalizado"/></div>
-
-<div style="text-align:center"><img src=""
-    alt="Migración de los Datos"/></div>
-
-<div style="text-align:center"><img src=""
-    alt="Presentación de los Datos"/></div>
